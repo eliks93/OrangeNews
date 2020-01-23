@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export default () => (
   <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
     <div className="jumbotron jumbotron-fluid bg-transparent">
+      <center>
       <div className="container secondary-color">
         <h1 className="display-4">Orange News</h1>
         <p className="lead">
@@ -18,6 +19,7 @@ export default () => (
           View the news
         </Link>
       </div>
+      </center>
     </div>
   </div>
 );
