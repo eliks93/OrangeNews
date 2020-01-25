@@ -18,6 +18,13 @@ export default () => (
         >
           View the news
         </Link>
+        <Link
+          to="/register"
+          className="btn btn-lg custom-button"
+          role="button"
+        >
+          Register
+        </Link>
       </div>
       </center>
     </div>
