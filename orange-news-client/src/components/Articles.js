@@ -7,7 +7,8 @@ constructor(props) {
     super(props);
     this.state = { 
       isLoggedIn: props.loggedInStatus,
-      user: props.user
+      user: props.user,
+      articles: []
      };
   }
   componentWillMount() {
@@ -18,9 +19,11 @@ constructor(props) {
    {withCredentials: true})
     .then(response => {
       if (response.data.articles) {
-        this.displayArticles(response.data.articles)
+        console.log(response.data.articles[0])
+        this.setState({
+          articles: response.data.articles
+        })
       } else {
-        console.log(response)
         this.setState({
           errors: response.data.errors
         })
@@ -28,12 +31,23 @@ constructor(props) {
     })
     .catch(error => console.log('api errors:', error))
   }
-  displayArticles = (data) => {
-    let articles
-    for (const article of data) {
-      articles += <div><Article title={article.headline} snippet={article.snippet} image={article.image} link={article.link} publisher={article.publisher}></Article></div>
-    }
-    return (<div> {articles} </div>)
+  displayArticles = () => {
+    let data = [this.state.articles]
+   return (
+     <ul>
+       {data[0].map(function(article) {
+         return (
+          <Article 
+          headline={article.headline} 
+          snippet={article.snippet} 
+          image={article.image} 
+          link={article.link} 
+          publisher={article.publisher}>
+          </Article>
+         )
+       })}
+     </ul>
+   )
   }
   handleErrors = () => {
     return (
@@ -55,7 +69,7 @@ constructor(props) {
    </div>
    <div>
     {
-      this.state.errors ? this.handleErrors() : null
+      this.state.errors ? this.handleErrors() : this.displayArticles()
     }
     </div>
     </div>
