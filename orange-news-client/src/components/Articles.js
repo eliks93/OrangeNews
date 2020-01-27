@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import Article from './Article'
 class Articles extends Component {
 constructor(props) {
     super(props);
@@ -17,7 +18,7 @@ constructor(props) {
    {withCredentials: true})
     .then(response => {
       if (response.data.articles) {
-        this.displayArticles()
+        this.displayArticles(response.data.articles)
       } else {
         console.log(response)
         this.setState({
@@ -26,6 +27,13 @@ constructor(props) {
       }
     })
     .catch(error => console.log('api errors:', error))
+  }
+  displayArticles = (data) => {
+    let articles
+    for (const article of data) {
+      articles += <div><Article title={article.headline} snippet={article.snippet} image={article.image} link={article.link} publisher={article.publisher}></Article></div>
+    }
+    return (<div> {articles} </div>)
   }
   handleErrors = () => {
     return (
