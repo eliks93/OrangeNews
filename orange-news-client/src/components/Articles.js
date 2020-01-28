@@ -11,8 +11,19 @@ constructor(props) {
       articles: []
      };
   }
-  componentWillMount() {
+
+  handleClick = () => {
+    axios.delete('http://localhost:3001/logout', {withCredentials: true})
+    .then(response => {
+      this.props.handleLogout()
+      this.props.history.push('/')
+    })
+    .catch(error => console.log(error))
+  }
+
+  componentDidMount() {
     this.getArticles()
+    this.props.loginStatus()
   }
   getArticles = () => {
     axios.get('http://localhost:3001/articles', 
@@ -65,6 +76,9 @@ constructor(props) {
     <div>
       Logged in as {this.props.user.email}
       or <Link to='/'>home</Link>
+   </div>
+   <div>
+   <Link to='/logout' onClick={this.handleClick}>Log Out</Link>
    </div>
    <div>
     {

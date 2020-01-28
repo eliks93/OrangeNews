@@ -67,7 +67,7 @@ class App extends Component {
             <Route 
               exact path='/articles' 
               render={props => (
-              <Articles {...props} user={this.state.user} loggedInStatus={this.state.isLoggedIn}/>
+              <Articles {...props} handleLogout={this.handleLogout} user={this.state.user} loginStatus ={this.loginStatus} loggedInStatus={this.state.isLoggedIn}/>
               )}
             />
           </Switch>

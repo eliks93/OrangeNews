@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
+import "./Home.css"
 
 export default function Home(props) {
   if(props.loggedInStatus) {
@@ -17,17 +18,37 @@ export default function Home(props) {
 
   return (
     
-    <div>
-      {/* { props.loggedInStatus ? } */}
-      <Link to='/login'>Log In</Link>
-      <br></br>
-      <Link to='/register'>Sign Up</Link>
-      <br></br>
-      { 
-        props.loggedInStatus ? 
-        <Link to='/logout' onClick={handleClick}>Log Out</Link> : 
-        null
-      }
+
+    <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
+    <div className="jumbotron jumbotron-fluid bg-transparent">
+    <center>
+      <div className="container secondary-color">
+        <h1 className="display-4">OrangeNews</h1>
+        <p className="lead">
+          The Day's News As I Scrape It
+        </p>
+        
+        <hr className="my-4" />
+        <Link
+          to="/login"
+          className="btn btn-block btn-lg custom-button"
+          role="button"
+        >
+          Login
+        </Link>
+        <br></br>
+
+        <Link
+          to="/register"
+          className="btn btn-block btn-lg custom-button"
+          role="button"
+        >
+          Register
+        </Link>
+    
+      </div>
+      </center>
     </div>
-  );
+  </div>
+);
 };
