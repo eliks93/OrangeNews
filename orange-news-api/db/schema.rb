@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_01_26_224848) do
     t.string "image", default: "n/a"
     t.string "link", null: false
     t.string "publisher", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", default: DateTime.now
     t.datetime "updated_at", null: false
   end
 

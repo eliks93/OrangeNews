@@ -13,4 +13,14 @@ class ArticlesController < ApplicationController
         }
       end
     end
+  def create
+    @article = Article.new(user_params)
+    if @article.save
+      p @article
+    else 
+      p @article.errors
+    end
+  end
+  def destroy
+    Article.where(created_at: 2.days.ago..DateTime.now).delete_all
 end
