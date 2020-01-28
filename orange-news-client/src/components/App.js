@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 import axios from 'axios'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Home from './Home'
@@ -13,10 +14,7 @@ class App extends Component {
       user: {}
      };
   }
-  componentDidMount() {
-    this.loginStatus()
-  }
- 
+
   loginStatus = () => {
     axios.get('http://localhost:3001/logged_in', 
    {withCredentials: true})
@@ -34,6 +32,7 @@ class App extends Component {
       isLoggedIn: true,
       user: data.user
     })
+    
   }
   handleLogout = () => {
     this.setState({
@@ -41,6 +40,7 @@ class App extends Component {
     user: {}
     })
   }
+  
   render() {
     return (
       <div>

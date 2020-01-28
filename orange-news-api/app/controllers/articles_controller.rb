@@ -23,4 +23,5 @@ class ArticlesController < ApplicationController
   end
   def destroy
     Article.where(created_at: 2.days.ago..DateTime.now).delete_all
+  end
 end

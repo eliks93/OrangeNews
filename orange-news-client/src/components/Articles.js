@@ -19,7 +19,6 @@ constructor(props) {
    {withCredentials: true})
     .then(response => {
       if (response.data.articles) {
-        console.log(response.data.articles[0])
         this.setState({
           articles: response.data.articles
         })

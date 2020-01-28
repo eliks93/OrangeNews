@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 
-const Home = (props) => {
-
+export default function Home(props) {
+  if(props.loggedInStatus) {
+    props.history.push('/articles')
+  }
   const handleClick = () => {
     axios.delete('http://localhost:3001/logout', {withCredentials: true})
     .then(response => {
@@ -14,6 +16,7 @@ const Home = (props) => {
   }
 
   return (
+    
     <div>
       {/* { props.loggedInStatus ? } */}
       <Link to='/login'>Log In</Link>
@@ -28,4 +31,3 @@ const Home = (props) => {
     </div>
   );
 };
-export default Home;
