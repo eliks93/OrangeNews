@@ -59,42 +59,81 @@ handleErrors = () => {
 render() {
     const {username, email, password} = this.state
 return (
-      <div>
-        <h1>Log In</h1>
+
+//   <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
+//   <div className="jumbotron jumbotron-fluid bg-transparent">
+//     <div className="container secondary-color">
+//       <h1 className="display-4">Food Recipes</h1>
+//       <p className="lead">
+//         A curated list of recipes for the best homemade meal and delicacies.
+//       </p>
+//       <hr className="my-4" />
+//       <Link
+//         to="/recipes"
+//         className="btn btn-lg custom-button"
+//         role="button"
+//       >
+//         View Recipes
+//       </Link>
+//     </div>
+//   </div>
+// </div>
+
+
+  
+
+      <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
+        <div className="jumbotron jumbotron-fluid bg-transparent"></div>
+        <div className="container secondary-color">
+        <center>
+        <h1 className="display-4">OrangeNews</h1>
+        <p className="lead">
+          Please Login Below
+        </p>
+        <hr className="my-4" />
+        </center>
         <form onSubmit={this.handleSubmit}>
+          <div class="form-group">
+          <label for="exampleInputEmail1">Email Address</label>
           <input
-            placeholder="username"
-            type="text"
-            name="username"
-            value={username}
-            onChange={this.handleChange}
-          />
-          <input
+            class="form-control"
             placeholder="email"
             type="text"
             name="email"
             value={email}
             onChange={this.handleChange}
           />
+          <label for="exampleInputPassword1">Password</label>
           <input
+            class="form-control"
             placeholder="password"
             type="password"
             name="password"
             value={password}
             onChange={this.handleChange}
           />
-          <button placeholder="submit" type="submit">
-            Log In
-          </button>
-          <div>
-           or <Link to='/register'>sign up</Link>
           </div>
-          
-        </form>
-        <div>
+          <div>
           {
             this.state.errors ? this.handleErrors() : null
           }
+        </div>
+          <button className="btn btn-block btn-lg custom-button" placeholder="submit" type="submit">
+            Log In
+          </button>
+          <br></br>
+
+          <div>
+          <Link
+            to="/register"
+            className="btn btn-block btn-lg custom-button"
+            role="button"
+          >
+            Register
+        </Link>
+          </div>
+          
+        </form>
         </div>
       </div>
     );

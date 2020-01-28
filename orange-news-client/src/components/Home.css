@@ -34,3 +34,9 @@
   width: 100%;
   opacity: 0.4;
 }
+li {
+  color: red;
+  text-emphasis: emphasis;
+  font-size: 2em;
+
+}
