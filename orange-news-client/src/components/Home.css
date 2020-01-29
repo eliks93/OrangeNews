@@ -37,6 +37,6 @@
 li {
   color: red;
   text-emphasis: emphasis;
-  font-size: 2em;
-
+  font-size: 100%;
+  width: 17rem
 }

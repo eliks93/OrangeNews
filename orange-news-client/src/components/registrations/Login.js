@@ -50,7 +50,7 @@ handleErrors = () => {
       <div>
         <ul>
         {this.state.errors.map(error => {
-        return <li key={error}>{error}</li>
+        return <li class="text-wrap" key={error}>{error}</li>
           })}
         </ul>
       </div>
@@ -83,7 +83,7 @@ return (
   
 
       <div className="vw-100 vh-100 primary-color d-flex align-items-center justify-content-center">
-        <div className="jumbotron jumbotron-fluid bg-transparent"></div>
+        <div className="jumbotron jumbotron-fluid bg-transparent">
         <div className="container secondary-color">
         <center>
         <h1 className="display-4">OrangeNews</h1>
@@ -134,6 +134,7 @@ return (
           </div>
           
         </form>
+        </div>
         </div>
       </div>
     );
