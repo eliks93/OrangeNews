@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   def index
     @articles = Article.all
-    p @articles.length
+    p @articles
       if @articles.length > 0
         render json: {
           articles: @articles
