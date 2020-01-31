@@ -7,7 +7,8 @@ return (
     <div className="jumbotron jumbotron-fluid bg-transparent">
       <div className="container secondary-color">
       <h4 className="display-4">{props.headline}</h4>
-    </div>
+    </div> 
+      <img src={props.image} alt="from original article"></img>
     <div>
       <h6>{props.publisher}</h6>
     </div>
