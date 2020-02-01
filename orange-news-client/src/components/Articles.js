@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import Article from './Article'
+
 class Articles extends Component {
 constructor(props) {
     super(props);
