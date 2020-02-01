@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
@@ -37,7 +38,7 @@ def get_bbc():
 
   content[0].click()
 
-  soup = BeautifulSoup(driver.page_source)
+  soup = BeautifulSoup(driver.page_source, 'html.parser')
   headline = soup.find('h1', attrs={'class':'story-body__h1'}).text
   image = soup.find('img', attrs={'class':'js-image-replace'})['src']
   snippet_one = soup.find('p', attrs={'class':'story-body__introduction'})
@@ -62,7 +63,7 @@ def get_new_york():
   content = driver.find_element_by_class_name('css-1wgguqj')
   content.click()
 
-  soup = BeautifulSoup(driver.page_source)
+  soup = BeautifulSoup(driver.page_source, 'html.parser')
   headline = soup.find('span', attrs={'class':"balancedHeadline"}).text
   image = soup.find('img', attrs={'class':'css-11cwn6f'})['src']
   snippet_one = soup.find('p', attrs={'class':'css-exrw3m evys1bk0'})
@@ -82,14 +83,17 @@ def get_new_york():
   print('create NYT article')
 
 def get_cbc():
-  wait = WebDriverWait(driver, 8)
   driver.get("https://www.cbc.ca/news")
   content = driver.find_element_by_class_name('headline')
   content.click()
-
-  wait.until(EC.presence_of_element_located((By.CLASS_NAME, 'detailHeadline')))
-  soup = BeautifulSoup(driver.page_source)
-
+  try:
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "detailHeadline")))    
+    print ("Page is ready!")
+  except TimeoutException:
+    print ("Loading took too much time!")
+    return
+  content = driver.page_source
+  soup = BeautifulSoup(content, 'html.parser')
   headline = soup.find('h1').text
   image = soup.find('img')['src']
   snippet_one = soup.find('p')

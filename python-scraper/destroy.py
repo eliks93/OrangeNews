@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 import requests
 
 def destroy_articles():
