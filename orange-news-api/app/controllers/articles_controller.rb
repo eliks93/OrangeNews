@@ -14,14 +14,29 @@ class ArticlesController < ApplicationController
       end
     end
   def create
-    @article = Article.new(user_params)
+    @article = Article.new(article_params)
     if @article.save
-      p @article
+      render json: {
+        status: 200
+      }
     else 
-      p @article.errors
+      render json: {
+        errors: @article.errors,
+        status: 500
+    }
     end
   end
   def destroy
-    Article.where(created_at: 2.days.ago..DateTime.now).delete_all
+    p Article.select(:created_at, :id)
+    before = Article.count
+    Article.where('created_at < ?', 24.hours.ago).delete_all
+    after = Article.count
+    render json: {
+      before: before,
+      after: after
+    }
+  end
+  def article_params
+    params.permit(:headline, :link, :image, :snippet, :publisher)
   end
 end
