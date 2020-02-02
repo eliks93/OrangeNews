@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all
+    @articles = Article.order(id: :desc)
     p @articles
       if @articles.length > 0
         render json: {
