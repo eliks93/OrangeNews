@@ -60,7 +60,7 @@ def get_bbc():
 def get_new_york():
   driver.get("https://www.nytimes.com/")
 
-  content = driver.find_element_by_class_name('css-1wgguqj')
+  content = driver.find_element_by_class_name('balancedHeadline')
   content.click()
 
   soup = BeautifulSoup(driver.page_source, 'html.parser')
