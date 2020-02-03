@@ -42,7 +42,7 @@ def get_bbc():
 
   soup = BeautifulSoup(driver.page_source, 'html.parser')
   headline = soup.find('h1', attrs={'class':'story-body__h1'}).text
-  image = soup.find('img', attrs={'class':'responsive-image__img'})['src']
+  image = soup.find('img').find_next('img')['src']
   snippet_one = soup.find('p', attrs={'class':'story-body__introduction'})
   snippet_two = snippet_one.find_next('p')
   snippet_three = snippet_two.find_next('p')
@@ -55,7 +55,7 @@ def get_bbc():
     'link': link,
     'publisher': 'The BBC'
   }
-
+  print(image)
   create_article(article)
   print('create BBC article')
   
@@ -132,16 +132,16 @@ def get_cnn():
   content = driver.page_source
   soup = BeautifulSoup(content, 'html.parser')
   headline = soup.find('h1').text
-  image = soup.find('img', attrs={'media__image'})['src']
-  snippet_one = soup.find('p', attrs={'class':'zn_body_paragraph'})
+  image = 'https:' + soup.find('img', attrs={'media__image'}).find_next('img')['src']
+  snippet_one = soup.find('p', attrs={'class':'zn-body__paragraph'})
   print(snippet_one)
-  # snippet_two = snippet_one.find_next('p')
-  # snippet_three = snippet_two.find_next('p')
-  # snippets = snippet_one.text + '\n' + snippet_two.text + '\n' + snippet_three.text
+  snippet_two = soup.find('div', attrs={'class':'zn-body__paragraph'})
+  snippet_three = snippet_two.find_next('div')
+  snippets = snippet_one.text + '\n' + snippet_two.text + '\n' + snippet_three.text
   link = driver.current_url
   article = {
     'headline': headline,
-    # 'snippet': snippets,
+    'snippet': snippets,
     'image': image,
     'link': link,
     'publisher': 'CNN'
@@ -151,8 +151,9 @@ def get_cnn():
   print('creating cnn article')
 
 
-get_cnn()
+
 get_new_york()
 get_bbc()
 get_cbc()
+get_cnn()
 driver.close()
