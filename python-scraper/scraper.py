@@ -35,14 +35,16 @@ driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH,
                          )  
 def get_bbc():
   driver.get("https://www.bbc.com/news")
-
   content = driver.find_elements_by_class_name('gs-c-promo-heading')
-
-  content[0].click()
+  if driver.find_elements_by_class_name('gs-c-live-pulse__text'):
+    print('live detected')
+    content[2].click()
+  else:
+    content[0].click()
 
   soup = BeautifulSoup(driver.page_source, 'html.parser')
   headline = soup.find('h1', attrs={'class':'story-body__h1'}).text
-  image = soup.find('img').find_next('img')['src']
+  image = soup.find('img').find_next('img').find_next('img')['src']
   snippet_one = soup.find('p', attrs={'class':'story-body__introduction'})
   snippet_two = snippet_one.find_next('p')
   snippet_three = snippet_two.find_next('p')
@@ -65,12 +67,19 @@ def get_new_york():
   content = driver.find_element_by_class_name('balancedHeadline')
   content.click()
   headline = ''
+  image = ''
   soup = BeautifulSoup(driver.page_source, 'html.parser')
-  if soup.find('span', attrs={'class':"balancedHeadline"}).text:
+  # print(soup.find('span', attrs={'class':"balancedHeadline"}))
+  if soup.find('span', attrs={'class':"balancedHeadline"}) != None:
     headline = soup.find('span', attrs={'class':"balancedHeadline"}).text
   else:
-    print('find other thingy')
-  image = soup.find('img', attrs={'class':'css-11cwn6f'})['src']
+    print('headline not found, moving to next sight')
+    return
+  print(type(soup.find('img', attrs={'class':'css-11cwn6f'})))
+  if soup.find('img', attrs={'class':'css-11cwn6f'}) != None:
+    image = soup.find('img', attrs={'class':'css-11cwn6f'})['src']
+  else:
+    image = soup.find('img')['src']
   snippet_one = soup.find('p', attrs={'class':'css-exrw3m evys1bk0'})
   snippet_two = snippet_one.find_next('p')
   snippet_three = snippet_two.find_next('p')
