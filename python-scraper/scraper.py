@@ -64,9 +64,12 @@ def get_new_york():
 
   content = driver.find_element_by_class_name('balancedHeadline')
   content.click()
-
+  headline = ''
   soup = BeautifulSoup(driver.page_source, 'html.parser')
-  headline = soup.find('span', attrs={'class':"balancedHeadline"}).text
+  if soup.find('span', attrs={'class':"balancedHeadline"}).text:
+    headline = soup.find('span', attrs={'class':"balancedHeadline"}).text
+  else:
+    print('find other thingy')
   image = soup.find('img', attrs={'class':'css-11cwn6f'})['src']
   snippet_one = soup.find('p', attrs={'class':'css-exrw3m evys1bk0'})
   snippet_two = snippet_one.find_next('p')

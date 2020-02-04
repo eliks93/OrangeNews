@@ -3,21 +3,22 @@ import React, { Component } from 'react';
 const Article = (props) => {
   console.log(props, 'HI FROME ACH')
 return (
-  <div className="vw-25 vh-25 primary-color d-flex align-items-center justify-content-center">
-    <div className="jumbotron jumbotron-fluid bg-transparent">
-      <div className="container secondary-color">
-      <h4 className="display-4">{props.headline}</h4>
-    </div> 
-      <img src={props.image} alt="from original article"></img>
+  <>
+      <h4 className="display-4 text-center">{props.headline}</h4>
+    <div>
+      <img className="img-fluid rounded mx-auto d-block" src={props.image} alt="from original article"></img>
+    </div>
     <div>
       <h6>{props.publisher}</h6>
     </div>
     <div>
+    <blockquote class="blockquote">
       <p>{props.snippet}</p>
+    </blockquote>
   </div>
   <a href={props.link}>Read Full Article</a>
-  </div>
-  </div>
+  </>
+  
 )
 }
 

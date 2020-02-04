@@ -81,10 +81,15 @@ constructor(props) {
    <div>
    <Link to='/logout' onClick={this.handleClick}>Log Out</Link>
    </div>
-   <div>
+   <div className="vw-10 vh-10 primary-color d-flex align-items-center justify-content-center">
+   <div className="jumbotron jumbotron-fluid bg-transparent">
+   <div className="container secondary-color">
+
     {
       this.state.errors ? this.handleErrors() : this.displayArticles()
     }
+    </div>
+    </div>
     </div>
     </div>
   );
