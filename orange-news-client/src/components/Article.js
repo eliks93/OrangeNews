@@ -9,11 +9,11 @@ return (
       <img className="img-fluid rounded mx-auto d-block" src={props.image} alt="from original article"></img>
     </div>
     <div>
-      <h6>{props.publisher}</h6>
+      <h6 className="mx-auto">Published by: {props.publisher}</h6>
     </div>
     <div>
     <blockquote class="blockquote">
-      <p>{props.snippet}</p>
+      <p className="mx-auto">{props.snippet}</p>
     </blockquote>
   </div>
   <a href={props.link}>Read Full Article</a>

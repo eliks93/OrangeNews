@@ -43,4 +43,16 @@ li {
 
 .container {
   padding: 0%;
+  width: 90%;
 }
+
+ul {
+  padding: 0%;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 768px) { 
+  .display-4 {
+    font-size: 1.5em;
+  }
+ }
