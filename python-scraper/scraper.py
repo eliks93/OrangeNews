@@ -23,6 +23,7 @@ PATH_TO_EXTENSION = './extension_1_24_2_0.crx'
 
 chrome_options = Options()
 # chrome_options.add_extension(PATH_TO_EXTENSION)
+chrome_options.add_argument("--mute-audio")
 user_agent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.50 Safari/537.36'    
 chrome_options.add_argument('user-agent={0}'.format(user_agent))
 chrome_options.add_argument('--ignore-certificate-errors')
@@ -44,7 +45,7 @@ def get_bbc():
 
   soup = BeautifulSoup(driver.page_source, 'html.parser')
   headline = soup.find('h1', attrs={'class':'story-body__h1'}).text
-  image = soup.find('img').find_next('img').find_next('img')['src']
+  image = soup.find('img', attrs={'class':'js-image-replace'})['src']
   snippet_one = soup.find('p', attrs={'class':'story-body__introduction'})
   snippet_two = snippet_one.find_next('p')
   snippet_three = snippet_two.find_next('p')
@@ -109,7 +110,7 @@ def get_cbc():
   content = driver.page_source
   soup = BeautifulSoup(content, 'html.parser')
   headline = soup.find('h1').text
-  image = soup.find('img')['src']
+  image = soup.find('img').find_next('img')['src']
   snippet_one = soup.find('p')
   snippet_two = snippet_one.find_next('p')
   snippet_three = snippet_two.find_next('p')
@@ -144,7 +145,7 @@ def get_cnn():
   content = driver.page_source
   soup = BeautifulSoup(content, 'html.parser')
   headline = soup.find('h1').text
-  image = 'https:' + soup.find('img', attrs={'media__image'}).find_next('img')['src']
+  image = 'https:' + soup.find('img', attrs={'media__image'})['src']
   snippet_one = soup.find('p', attrs={'class':'zn-body__paragraph'})
   print(snippet_one)
   snippet_two = soup.find('div', attrs={'class':'zn-body__paragraph'})
