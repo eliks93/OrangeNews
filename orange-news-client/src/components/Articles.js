@@ -73,14 +73,13 @@ constructor(props) {
   }
   render() {
   return (
-    <div>
-    <div>
+    <>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+     <a class="navbar-brand" href="#">OrangeNews</a>
       Logged in as {this.props.user.email}
-      or <Link to='/'>home</Link>
-   </div>
-   <div>
-   <Link to='/logout' onClick={this.handleClick}>Log Out</Link>
-   </div>
+   <Link className="btn custom-button" to='/articles'>Articles</Link>
+   <Link className="btn custom-button" to='/logout' onClick={this.handleClick}>Log Out</Link>
+   </nav>
    <div className="vw-10 vh-10 primary-color d-flex align-items-center justify-content-center">
    <div className="jumbotron jumbotron-fluid bg-transparent">
    <div className="container secondary-color">
@@ -91,7 +90,7 @@ constructor(props) {
     </div>
     </div>
     </div>
-    </div>
+    </>
   );
   }
 };
