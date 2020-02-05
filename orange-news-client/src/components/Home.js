@@ -29,6 +29,9 @@ export default function Home(props) {
         </p>
         
         <hr className="my-4" />
+        { 
+        props.loggedInStatus ? 
+        <>
         <Link
           to="/login"
           className="btn btn-block btn-lg custom-button"
@@ -44,7 +47,17 @@ export default function Home(props) {
           role="button"
         >
           Register
-        </Link>
+        </Link> 
+        </>:
+        <Link
+        to="/articles"
+        className="btn btn-block btn-lg custom-button"
+        role="button"
+      >
+        Show me the news
+      </Link> 
+        }
+        
     
       </div>
       </center>

@@ -74,11 +74,11 @@ constructor(props) {
   render() {
   return (
     <>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-     <a class="navbar-brand" href="#">OrangeNews</a>
-      Logged in as {this.props.user.email}
-   <Link className="btn custom-button" to='/articles'>Articles</Link>
-   <Link className="btn custom-button" to='/logout' onClick={this.handleClick}>Log Out</Link>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+     <a class="navbar-brand" href="/">OrangeNews</a>
+      <span className="nav-link">Logged in as {this.props.user.email}</span>
+   <Link className="btn nav-link custom-button" to='/articles'>Preferences</Link>
+   <Link className="btn nav-link custom-button" to='/logout' onClick={this.handleClick}>Log Out</Link>
    </nav>
    <div className="vw-10 vh-10 primary-color d-flex align-items-center justify-content-center">
    <div className="jumbotron jumbotron-fluid bg-transparent">

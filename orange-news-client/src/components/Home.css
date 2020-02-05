@@ -19,6 +19,9 @@
   color: #FFF !important;
   border: none;
 }
+span.navbar-brand {
+  color:#FFF;
+}
 .hero {
   width: 100vw;
   height: 50vh;
