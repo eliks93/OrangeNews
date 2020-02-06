@@ -105,7 +105,7 @@ constructor(props) {
       <Form.Check checked={this.state['The BBC']} onChange={this.handleChange} label="The BBC" type='checkbox' id='default-checkbox-1' name='The BBC' />
       <Form.Check name='The CBC' checked={this.state['The CBC']} onChange={this.handleChange} label="The CBC" type="checkbox" id='default-checkbox-2' />
       <Form.Check name='CNN' checked={this.state['CNN']} onChange={this.handleChange} label="CNN" type="checkbox" id='default-checkbox-3' />
-      <Form.Check name='The New York Times' checked={this.state['The NYT']} onChange={this.handleChange} label="The NYT" type="checkbox" id='default-checkbox-4' />
+      <Form.Check name='The New York Times' checked={this.state['The New York Times']} onChange={this.handleChange} label="The NYT" type="checkbox" id='default-checkbox-4' />
     </DropdownButton>
   
    <Link className="ml-auto btn nav-link custom-button" to='/logout' onClick={this.handleClick}>Log Out</Link>
