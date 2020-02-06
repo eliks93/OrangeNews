@@ -16,11 +16,22 @@
   border: none;
 }
 .custom-button.btn:hover {
-  color: #FFF !important;
+  color: #bbbbbb !important;
   border: none;
 }
-span.navbar-brand {
+span.nav-link {
   color:#FFF;
+}
+#custom-button {
+  background-color: #293241;
+  color: #FFF;
+  border: none;
+  outline: none;
+}
+#custom-button:hover {
+  color: #bbbbbb !important;
+  border: none;
+  outline: none;
 }
 .hero {
   width: 100vw;

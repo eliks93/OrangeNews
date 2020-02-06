@@ -49,7 +49,7 @@ class App extends Component {
           <Route 
               exact path='/' 
               render={props => (
-              <Home {...props} user={this.state.user} handleLogout={this.handleLogout} loggedInStatus={this.state.isLoggedIn}/>
+              <Home {...props} user={this.state.user} handleLogout={this.handleLogout}  loginStatus={this.loginStatus} loggedInStatus={this.state.isLoggedIn}/>
               )}
             />
             <Route 
@@ -67,7 +67,7 @@ class App extends Component {
             <Route 
               exact path='/articles' 
               render={props => (
-              <Articles {...props} handleLogout={this.handleLogout} user={this.state.user} loginStatus ={this.loginStatus} loggedInStatus={this.state.isLoggedIn}/>
+              <Articles {...props} handleLogout={this.handleLogout} user={this.state.user} loginStatus={this.loginStatus} loggedInStatus={this.state.isLoggedIn}/>
               )}
             />
           </Switch>

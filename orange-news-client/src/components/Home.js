@@ -4,18 +4,7 @@ import axios from 'axios'
 import "./Home.css"
 
 export default function Home(props) {
-  if(props.loggedInStatus) {
-    props.history.push('/articles')
-  }
-  const handleClick = () => {
-    axios.delete('http://localhost:3001/logout', {withCredentials: true})
-    .then(response => {
-      props.handleLogout()
-      props.history.push('/')
-    })
-    .catch(error => console.log(error))
-  }
-
+  props.loginStatus()
   return (
     
 
@@ -30,7 +19,7 @@ export default function Home(props) {
         
         <hr className="my-4" />
         { 
-        props.loggedInStatus ? 
+        !props.loggedInStatus ?
         <>
         <Link
           to="/login"
@@ -48,7 +37,7 @@ export default function Home(props) {
         >
           Register
         </Link> 
-        </>:
+        </> :
         <Link
         to="/articles"
         className="btn btn-block btn-lg custom-button"

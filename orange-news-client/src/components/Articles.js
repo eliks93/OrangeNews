@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import Article from './Article'
+import DropdownButton from 'react-bootstrap/DropdownButton'
+import Form from 'react-bootstrap/Form'
+
 
 class Articles extends Component {
 constructor(props) {
@@ -9,8 +12,13 @@ constructor(props) {
     this.state = { 
       isLoggedIn: props.loggedInStatus,
       user: props.user,
-      articles: []
+      articles: [],
+      'The BBC': true,
+      'The New York Times': true,
+      'The CBC': true,
+      'CNN': true
      };
+     this.handleChange = this.handleChange.bind(this);
   }
 
   handleClick = () => {
@@ -24,8 +32,19 @@ constructor(props) {
 
   componentDidMount() {
     this.getArticles()
-    this.props.loginStatus()
+    this.props.loginStatus() 
+    if(!this.props.loginStatus) {
+      this.props.history.push('/')
+    }
+
   }
+  handleChange(evt) {
+    const target = evt.target
+    const checked = target.checked
+    const publisher = target.name
+    this.setState({ [publisher]: checked});
+  }
+
   getArticles = () => {
     axios.get('http://localhost:3001/articles', 
    {withCredentials: true})
@@ -44,18 +63,23 @@ constructor(props) {
   }
   displayArticles = () => {
     let data = [this.state.articles]
+    let publishers = this.state
    return (
      <ul>
        {data[0].map(function(article) {
-         return (
-          <Article 
+        if(publishers[article.publisher]) {
+          return(
+          <Article
+          key={article.id} 
           headline={article.headline} 
           snippet={article.snippet} 
           image={article.image} 
           link={article.link} 
           publisher={article.publisher}>
           </Article>
-         )
+          )
+        }
+          return null 
        })}
      </ul>
    )
@@ -74,11 +98,17 @@ constructor(props) {
   render() {
   return (
     <>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-     <a class="navbar-brand" href="/">OrangeNews</a>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+     <a className="navbar-brand" href="/">OrangeNews</a>
       <span className="nav-link">Logged in as {this.props.user.email}</span>
-   <Link className="btn nav-link custom-button" to='/articles'>Preferences</Link>
-   <Link className="btn nav-link custom-button" to='/logout' onClick={this.handleClick}>Log Out</Link>
+    <DropdownButton id="custom-button" title="Preferences">
+      <Form.Check checked={this.state['The BBC']} onChange={this.handleChange} label="The BBC" type='checkbox' id='default-checkbox-1' name='The BBC' />
+      <Form.Check name='The CBC' checked={this.state['The CBC']} onChange={this.handleChange} label="The CBC" type="checkbox" id='default-checkbox-2' />
+      <Form.Check name='CNN' checked={this.state['CNN']} onChange={this.handleChange} label="CNN" type="checkbox" id='default-checkbox-3' />
+      <Form.Check name='The New York Times' checked={this.state['The NYT']} onChange={this.handleChange} label="The NYT" type="checkbox" id='default-checkbox-4' />
+    </DropdownButton>
+  
+   <Link className="ml-auto btn nav-link custom-button" to='/logout' onClick={this.handleClick}>Log Out</Link>
    </nav>
    <div className="vw-10 vh-10 primary-color d-flex align-items-center justify-content-center">
    <div className="jumbotron jumbotron-fluid bg-transparent">
