@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
 import Article from './Article'
-import DropdownButton from 'react-bootstrap/DropdownButton'
+import NavDropdown from 'react-bootstrap/NavDropdown'
 import Form from 'react-bootstrap/Form'
-
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
 class Articles extends Component {
 constructor(props) {
@@ -98,18 +99,21 @@ constructor(props) {
   render() {
   return (
     <>
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-     <a className="navbar-brand" href="/">OrangeNews</a>
-      <span className="nav-link">Logged in as {this.props.user.email}</span>
-    <DropdownButton id="custom-button" title="Preferences">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+     <Navbar.Brand className="navbar-brand" href="/">OrangeNews</Navbar.Brand>
+     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+     <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav.Item className="nav-link">Logged in as {this.props.user.email}</Nav.Item>
+    <NavDropdown id="collasible-nav-dropdown" title="Preferences">
       <Form.Check checked={this.state['The BBC']} onChange={this.handleChange} label="The BBC" type='checkbox' id='default-checkbox-1' name='The BBC' />
       <Form.Check name='The CBC' checked={this.state['The CBC']} onChange={this.handleChange} label="The CBC" type="checkbox" id='default-checkbox-2' />
       <Form.Check name='CNN' checked={this.state['CNN']} onChange={this.handleChange} label="CNN" type="checkbox" id='default-checkbox-3' />
       <Form.Check name='The New York Times' checked={this.state['The New York Times']} onChange={this.handleChange} label="The NYT" type="checkbox" id='default-checkbox-4' />
-    </DropdownButton>
-  
+    </NavDropdown>
+    
    <Link className="ml-auto btn nav-link custom-button" to='/logout' onClick={this.handleClick}>Log Out</Link>
-   </nav>
+   </Navbar.Collapse>
+   </Navbar>
    <div className="vw-10 vh-10 primary-color d-flex align-items-center justify-content-center">
    <div className="jumbotron jumbotron-fluid bg-transparent">
    <div className="container secondary-color">
