@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   def index
     @articles = Article.order(id: :desc)
-    p @articles
+    puts @articles
       if @articles.length > 0
         render json: {
           articles: @articles
@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
   def destroy
     p Article.select(:created_at, :id)
     before = Article.count
-    Article.where('created_at > ?', 24.hours.ago).delete_all
+    Article.where('created_at < ?', 24.hours.ago).delete_all
     after = Article.count
     render json: {
       before: before,

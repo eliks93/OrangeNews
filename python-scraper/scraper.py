@@ -73,19 +73,20 @@ def get_new_york():
   # print(soup.find('span', attrs={'class':"balancedHeadline"}))
   if soup.find('span', attrs={'class':"balancedHeadline"}) != None:
     headline = soup.find('span', attrs={'class':"balancedHeadline"}).text
+    image = soup.find('span', attrs={'class':"balancedHeadline"}).find_next('img')
+
+  elif soup.find('h1', attrs={'itemprop':'headline'}) != None:
+    headline = soup.find('h1', attrs={'itemprop':'headline'}).text
+    image = soup.find('h1', attrs={'itemprop':'headline'}).find_next('img')
   else:
-    print('headline not found, moving to next sight')
-    return
-  print(type(soup.find('img', attrs={'class':'css-11cwn6f'})))
-  if soup.find('img', attrs={'class':'css-11cwn6f'}) != None:
-    image = soup.find('img', attrs={'class':'css-11cwn6f'})['src']
-  else:
-    image = soup.find('img')['src']
-  snippet_one = soup.find('p', attrs={'class':'css-exrw3m evys1bk0'})
+      print('No Headline Found')
+      return
+  snippet_one = image.find_next('p')
   snippet_two = snippet_one.find_next('p')
   snippet_three = snippet_two.find_next('p')
   snippets = snippet_one.text + '\n' + snippet_two.text + '\n' + snippet_three.text
   link = driver.current_url
+  image = image['src']
   article = {
     'headline': headline,
     'snippet': snippets,
@@ -102,15 +103,17 @@ def get_cbc():
   content = driver.find_element_by_class_name('headline')
   content.click()
   try:
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "detailHeadline")))    
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, "div.story")))    
     print ("Page is ready!")
   except TimeoutException:
     print ("Loading took too much time!")
     return
   content = driver.page_source
   soup = BeautifulSoup(content, 'html.parser')
-  headline = soup.find('h1').text
-  image = soup.find('img').find_next('img')['src']
+  driver.save_screenshot('headline.png')
+  headline = soup.find('h1', attrs={'class':'detailHeadline'}).text
+  print(headline)
+  image = soup.find('h1', attrs={'class':'detailHeadline'}).find_next('img')['src']
   snippet_one = soup.find('p')
   snippet_two = snippet_one.find_next('p')
   snippet_three = snippet_two.find_next('p')
@@ -145,8 +148,8 @@ def get_cnn():
   content = driver.page_source
   soup = BeautifulSoup(content, 'html.parser')
   headline = soup.find('h1').text
-  image = 'https:' + soup.find('img', attrs={'media__image'})['src']
   snippet_one = soup.find('p', attrs={'class':'zn-body__paragraph'})
+  image = 'https:' + soup.find('p', attrs={'class':'zn-body__paragraph'}).find_next('img', attrs={'class':'media__image'})['src']
   print(snippet_one)
   snippet_two = soup.find('div', attrs={'class':'zn-body__paragraph'})
   snippet_three = snippet_two.find_next('div')
